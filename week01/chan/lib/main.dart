@@ -9,7 +9,9 @@ example1(){
   var isPublic = true;
   var visibility = isPublic ? 'public' : 'private';
   print(visibility);
-  String playerName(String? name) => name ?? 'Guest';
+  String playerName(String? name) {
+    return name ?? 'Guest';
+  }
   print(playerName(''));
   print(playerName(null));
 }

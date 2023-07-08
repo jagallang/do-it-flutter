@@ -12,10 +12,6 @@ Stream<int> countStream(int to) async* {
 }
 
 Future<int> sumStream(Stream<int> stream) async {
-  var sum = 0;
-  await for (var value in stream) {
-    print('sumStream : $value');
-    sum += value;
-  }
+  var sum = await stream.last;
   return sum;
 }
