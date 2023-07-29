@@ -28,6 +28,10 @@ class FirstPage extends StatelessWidget {
                           width: 100,
                           height: 100,
                           fit: BoxFit.contain,
+                        ),
+                        Text(
+                          '${animals[position].animalName}',
+                          style: TextStyle(fontSize: 30.0),
                         )
                       ],
                     )),
