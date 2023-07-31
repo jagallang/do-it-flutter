@@ -1,4 +1,5 @@
 import 'package:calculator/widgets/buttons/calculator_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -62,14 +63,50 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: [
                   Expanded(
-                    child: Text(
-                      _controller.text,
-                      style: TextStyle(
-                        fontSize: 50.0,
-                        fontWeight: FontWeight.w500,
+                    child: Center(
+                      child: Text(
+                        _controller.text,
+                        style: TextStyle(
+                          fontSize: 50.0,
+                          fontWeight: FontWeight.w300,
+                        ),
+                        textAlign: TextAlign.right,
                       ),
-                      textAlign: TextAlign.right,
                     ),
+                  ),
+                  Stack(
+                    children: [
+                      Row(children: [
+                        IconButton(
+                            padding: EdgeInsets.only(left: 50, right: 100),
+                            onPressed: () {},
+                            icon: Icon(
+                                size: 50,
+                                Icons.more_horiz_sharp,
+                                color: Colors.indigo)),
+                        Text('^',
+                            style: TextStyle(
+                                fontSize: 50,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.indigo))
+                      ]),
+                      Align(
+                          alignment: Alignment.bottomRight,
+                          child: IconButton(
+                            padding: EdgeInsets.only(right: 70),
+                            icon: Icon(
+                              size: 50,
+                              CupertinoIcons.delete_left_fill,
+                              color: Colors.indigo,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _controller.text = _controller.text
+                                    .substring(0, _controller.text.length - 1);
+                              });
+                            },
+                          )),
+                    ],
                   )
                 ],
               )),
@@ -261,18 +298,24 @@ class _MyHomePageState extends State<MyHomePage> {
       if (currentOperator == Operator.EMPTY) {
         _controller.text += s;
       } else if (currentOperator == Operator.ADD) {
-        _controller.text = '${double.parse(_controller.text)+double.parse(s)}';
+        _controller.text =
+            '${double.parse(_controller.text) + double.parse(s)}';
       } else if (currentOperator == Operator.SUBTRACT) {
-        _controller.text = '${double.parse(_controller.text)-double.parse(s)}';
+        _controller.text =
+            '${double.parse(_controller.text) - double.parse(s)}';
       } else if (currentOperator == Operator.MULTIPLY) {
-        _controller.text = '${double.parse(_controller.text)*double.parse(s)}';
+        _controller.text =
+            '${double.parse(_controller.text) * double.parse(s)}';
       } else if (currentOperator == Operator.DIVIDE) {
-        _controller.text = '${double.parse(_controller.text)/double.parse(s)}';
+        _controller.text =
+            '${double.parse(_controller.text) / double.parse(s)}';
       } else if (currentOperator == Operator.PERCENT) {
-        _controller.text = '${double.parse(_controller.text)%double.parse(s)}';
+        _controller.text =
+            '${double.parse(_controller.text) % double.parse(s)}';
       }
-      if(_controller.text.endsWith('.0')) {
-        _controller.text = _controller.text.substring(0, _controller.text.length-2);
+      if (_controller.text.endsWith('.0')) {
+        _controller.text =
+            _controller.text.substring(0, _controller.text.length - 2);
       }
       _currentOperator = Operator.EMPTY;
     });
